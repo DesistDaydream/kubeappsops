@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/DesistDaydream/kubeappsops/kube"
+	"github.com/DesistDaydream/kubeappsops/pkg/kube"
 	"github.com/gorilla/mux"
 	"github.com/kubeapps/common/response"
 	"github.com/kubeapps/kubeapps/pkg/dbutils"

@@ -22,7 +22,7 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/DesistDaydream/kubeappsops/kube"
+	"github.com/DesistDaydream/kubeappsops/pkg/kube"
 	yamlUtils "github.com/kubeapps/kubeapps/pkg/yaml"
 	authorizationapi "k8s.io/api/authorization/v1"
 	k8sErrors "k8s.io/apimachinery/pkg/api/errors"
