@@ -1,0 +1,18 @@
+apiVersion: skaffold/v2beta10
+kind: Config
+metadata:
+  name: kubeappsops
+build:
+  artifacts:
+  - image: docker.io/lchdzh/kubeappsops
+    docker:
+      dockerfile: Dockerfile
+deploy:
+  kubectl:
+    manifests:
+    - manifests/deployment.yaml
+    - manifests/kubeops-config.yaml
+    - manifests/kubeops-deployment.yaml
+    - manifests/kubeops-rbac.yaml
+    - manifests/kubeops-service.yaml
+    - manifests/kubeops-serviceaccount.yaml

@@ -1,0 +1,15 @@
+---
+# Source: kubeapps/templates/kubeops-config.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kubeappsops-config
+  labels:
+    app: kubeappsops-config
+data:
+  clusters.conf: |-
+    [
+      {
+        "name": "default"
+      }
+    ]

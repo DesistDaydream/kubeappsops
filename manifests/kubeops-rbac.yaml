@@ -1,0 +1,95 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: "kubeapps:controller:kubeops-ns-discovery-kubeapps"
+  labels:
+    app: kubeapps-bj-test-internal-kubeops
+rules:
+  - apiGroups:
+      - ""
+    resources:
+      - namespaces
+    verbs:
+      - list
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: "kubeapps:controller:kubeops-operators-kubeapps"
+  labels:
+    app: kubeapps-bj-test-internal-kubeops
+rules:
+  - apiGroups:
+      - packages.operators.coreos.com
+    resources:
+      - packagemanifests/icon
+    verbs:
+      - get
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: "kubeapps:controller:kubeops-ns-discovery-kubeapps"
+  labels:
+    app: kubeapps-bj-test-internal-kubeops
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: "kubeapps:controller:kubeops-ns-discovery-kubeapps"
+subjects:
+  - kind: ServiceAccount
+    name: kubeappsops
+    namespace: kubeapps
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: "kubeapps:controller:kubeops-operators-kubeapps"
+  labels:
+    app: kubeapps-bj-test-internal-kubeops
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: "kubeapps:controller:kubeops-operators-kubeapps"
+subjects:
+  - kind: ServiceAccount
+    name: kubeappsops
+    namespace: kubeapps
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: kubeappsops
+  labels:
+    app: kubeappsops
+rules:
+  - apiGroups:
+      - ""
+    resources:
+      - secrets
+    verbs:
+      - get
+      - create
+      - delete
+  - apiGroups:
+      - "kubeapps.com"
+    resources:
+      - apprepositories
+    verbs:
+      - get
+      - list
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: kubeappsops
+  labels:
+    app: kubeappsops
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: kubeappsops
+subjects:
+  - kind: ServiceAccount
+    name: kubeappsops
+    namespace: kubeapps

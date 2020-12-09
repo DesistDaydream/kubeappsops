@@ -1,0 +1,70 @@
+---
+# Source: kubeapps/templates/kubeops-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kubeappsops
+  labels:
+    app: kubeappsops
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kubeappsops
+  template:
+    metadata:
+      labels:
+        app: kubeappsops
+    spec:
+      serviceAccountName: kubeappsops
+      # Increase termination timeout to let remaining operations to finish before killing the pods
+      # This is because new releases/upgrades/deletions are synchronous operations
+      terminationGracePeriodSeconds: 300
+      containers:
+        - name: kubeops
+          image: docker.io/lchdzh/kubeappsops:v0.1
+          imagePullPolicy: "IfNotPresent"
+          command:
+            - /kubeops
+          args:
+            - --user-agent-comment=kubeapps/2.0.1
+            - --assetsvc-url=http://kubeapps-bj-test-internal-assetsvc:8080
+            - --clusters-config-path=/config/clusters.conf
+          volumeMounts:
+            - name: kubeappsops-config
+              mountPath: /config
+            - name: ca-certs
+              mountPath: /etc/additional-clusters-cafiles
+          env:
+            - name: POD_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+          ports:
+            - name: http
+              containerPort: 8080
+          livenessProbe:
+            httpGet:
+              path: /live
+              port: 8080
+            initialDelaySeconds: 60
+            timeoutSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: 8080
+            initialDelaySeconds: 0
+            timeoutSeconds: 5
+          resources:
+            limits:
+              cpu: 250m
+              memory: 256Mi
+            requests:
+              cpu: 25m
+              memory: 32Mi
+      volumes:
+        - name: kubeappsops-config
+          configMap:
+            name: kubeappsops-config
+        - name: ca-certs
+          emptyDir: {}
