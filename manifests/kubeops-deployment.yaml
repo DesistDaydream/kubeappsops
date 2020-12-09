@@ -25,7 +25,7 @@ spec:
           image: docker.io/lchdzh/kubeappsops:v0.1
           imagePullPolicy: "IfNotPresent"
           command:
-            - /kubeops
+            - /kubeappsops
           args:
             - --user-agent-comment=kubeapps/2.0.1
             - --assetsvc-url=http://kubeapps-bj-test-internal-assetsvc:8080

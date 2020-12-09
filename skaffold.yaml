@@ -7,10 +7,13 @@ build:
   - image: docker.io/lchdzh/kubeappsops
     docker:
       dockerfile: Dockerfile
+  tagPolicy:
+      envTemplate:
+        template: v0.1
 deploy:
   kubectl:
+    defaultNamespace: kubeappsops
     manifests:
-    - manifests/deployment.yaml
     - manifests/kubeops-config.yaml
     - manifests/kubeops-deployment.yaml
     - manifests/kubeops-rbac.yaml
