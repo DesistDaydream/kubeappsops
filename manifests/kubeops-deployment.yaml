@@ -23,7 +23,7 @@ spec:
       containers:
         - name: kubeops
           image: docker.io/lchdzh/kubeappsops:v0.1
-          imagePullPolicy: "IfNotPresent"
+          imagePullPolicy: "Always"
           command:
             - /kubeappsops
           args:

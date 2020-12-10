@@ -23,7 +23,7 @@ import (
 	"strings"
 
 	"github.com/DesistDaydream/kubeappsops/pkg/kube"
-	yamlUtils "github.com/kubeapps/kubeapps/pkg/yaml"
+	yamlUtils "github.com/DesistDaydream/kubeappsops/pkg/yaml"
 	authorizationapi "k8s.io/api/authorization/v1"
 	k8sErrors "k8s.io/apimachinery/pkg/api/errors"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"

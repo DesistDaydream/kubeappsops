@@ -6,7 +6,7 @@ import (
 	"strings"
 
 	"github.com/DesistDaydream/kubeappsops/pkg/chart/helm3to2"
-	"github.com/kubeapps/kubeapps/pkg/proxy"
+	"github.com/DesistDaydream/kubeappsops/pkg/proxy"
 	log "github.com/sirupsen/logrus"
 	"helm.sh/helm/v3/pkg/action"
 	"helm.sh/helm/v3/pkg/chart"

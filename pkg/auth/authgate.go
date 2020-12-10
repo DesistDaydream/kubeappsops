@@ -5,9 +5,9 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/DesistDaydream/kubeappsops/pkg/kube"
 	"github.com/gorilla/mux"
-	"github.com/kubeapps/common/response"
+	"github.com/DesistDaydream/kubeappsops/pkg/kube"	
+	"github.com/DesistDaydream/kubeappsops/common/response"
 	"github.com/kubeapps/kubeapps/pkg/dbutils"
 	"github.com/urfave/negroni"
 )
