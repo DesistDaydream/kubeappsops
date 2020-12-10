@@ -22,7 +22,7 @@ spec:
       terminationGracePeriodSeconds: 300
       containers:
         - name: kubeops
-          image: docker.io/lchdzh/kubeappsops:v0.1
+          image: docker.io/lchdzh/kubeappsops:v0.2
           imagePullPolicy: "Always"
           command:
             - /kubeappsops

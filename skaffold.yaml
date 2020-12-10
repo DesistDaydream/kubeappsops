@@ -9,7 +9,7 @@ build:
       dockerfile: Dockerfile
   tagPolicy:
       envTemplate:
-        template: v0.1
+        template: v0.2
 deploy:
   kubectl:
     defaultNamespace: kubeappsops
